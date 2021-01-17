@@ -2,10 +2,10 @@ http://localhost:3005/users/2;DROP TABLE users;
 
 ###
 
-POST http://localhost:3005/users HTTP/1.1
+PUT http://localhost:3005/users/1 HTTP/1.1
 Content-Type: application/json
 
 {
-  "username": "mom11",
-  "bio": "Im strong."
+  "username": "mom13",
+  "bio": "Im mom12."
 }
