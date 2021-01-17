@@ -1,14 +1,9 @@
 const app = require("./src/app.js");
 const pool = require("./src/pool");
+require("dotenv/config");
 
 pool
-  .connect({
-    host: "localhost",
-    port: 5432,
-    database: "socialnetwork",
-    user: "prisma",
-    password: "prisma",
-  })
+  .connect({ connectionString: process.env.DATABASE_URL })
   .then(() => {
     app().listen(3005, () => {
       console.log("Listening on port 3005");

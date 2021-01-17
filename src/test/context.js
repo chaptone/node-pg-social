@@ -2,13 +2,22 @@ const { randomBytes } = require("crypto");
 const { default: migrate } = require("node-pg-migrate");
 const format = require("pg-format");
 const pool = require("../pool");
+require("dotenv/config");
+
+const {
+  DATABASE_HOST,
+  DATABASE_PORT,
+  DATABASE_NAME,
+  DATABASE_USER,
+  DATABASE_PASSWORD,
+} = process.env;
 
 const DEFAULT_OPTS = {
-  host: "localhost",
-  port: 5432,
-  database: "socialnetwork-test",
-  user: "prisma",
-  password: "prisma",
+  host: DATABASE_HOST,
+  port: DATABASE_PORT,
+  database: `${DATABASE_NAME}-test`,
+  user: DATABASE_USER,
+  password: DATABASE_PASSWORD,
 };
 
 class Context {
@@ -34,18 +43,18 @@ class Context {
       noLock: true,
       dir: "migrations",
       databaseUrl: {
-        host: "localhost",
-        port: 5432,
-        database: "socialnetwork-test",
+        host: DATABASE_HOST,
+        port: DATABASE_PORT,
+        database: `${DATABASE_NAME}-test`,
         user: roleName,
         password: roleName,
       },
     });
 
     await pool.connect({
-      host: "localhost",
-      port: 5432,
-      database: "socialnetwork-test",
+      host: DATABASE_HOST,
+      port: DATABASE_PORT,
+      database: `${DATABASE_NAME}-test`,
       user: roleName,
       password: roleName,
     });
@@ -60,7 +69,7 @@ class Context {
   async reset() {
     return pool.query(`
       DELETE FROM users;
-    `)
+    `);
   }
 
   async close() {
