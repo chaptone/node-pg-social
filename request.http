@@ -1,4 +1,14 @@
-http://localhost:3005/users/2;DROP TABLE users;
+http://localhost:3005/users
+
+###
+
+POST http://localhost:3005/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "newUser",
+  "bio": "Im new."
+}
 
 ###
 
@@ -9,3 +19,8 @@ Content-Type: application/json
   "username": "mom13",
   "bio": "Im mom12."
 }
+
+###
+
+DELETE http://localhost:3005/users/4 HTTP/1.1
+Content-Type: application/json
